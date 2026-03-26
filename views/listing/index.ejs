@@ -1,0 +1,110 @@
+<% layout('/layouts/boilerplate') -%>
+
+    <body>
+
+
+        <div class="filters-main">
+            <div id="filters">
+                <div class="filter">
+                    <div><i class="fa-solid fa-fire"></i></div>
+                    <p>Trending</p>
+                </div>
+                <div class="filter">
+                    <div><i class="fa-solid fa-bed"></i></div>
+                    <p>Rooms</p>
+                </div>
+                <div class="filter">
+                    <div><i class="fa-solid fa-mountain-city"></i></div>
+                    <p>Iconic Cities</p>
+                </div>
+                <div class="filter">
+                    <div><i class="fa-solid fa-mountain"></i></div>
+                    <p>Mountains</p>
+                </div>
+                <div class="filter">
+                    <div><i class="fa-brands fa-fort-awesome"></i></div>
+                    <p>Castles</p>
+                </div>
+                <div class="filter">
+                    <div><i class="fa-solid fa-person-swimming"></i></div>
+                    <p>Amazing Pools</p>
+                </div>
+                <div class="filter">
+                    <div><i class="fa-solid fa-campground"></i></div>
+                    <p>Camping</p>
+                </div>
+                <div class="filter">
+                    <div><i class="fa-solid fa-cow"></i></div>
+                    <p>Farms</p>
+                </div>
+                <div class="filter">
+                    <div><i class="fa-regular fa-snowflake"></i></div>
+                    <p>Arctic</p>
+                </div>
+                <div class="filter">
+                    <div><i class="fa-solid fa-umbrella-beach"></i></div>
+                    <p>Beach</p>
+                </div>
+                <div class="filter">
+                    <div><i class="fa-solid fa-sailboat"></i></div>
+                    <p>Boats</p>
+                </div>
+            </div>
+            <div class="tax-toggle">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+                    <label class="form-check-label" for="switchCheckDefault">contrey name show</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="container my-4">
+            <div class="row g-4">
+
+                <% for(let listing of listings) { %>
+
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <a href="/listings/<%= listing._id %>" class="listing-non">
+                            <div class="card h-100 listing-card">
+
+                                <% let imageUrl=listing.image?.url || listing.image; %>
+                                    <% if(imageUrl) { %>
+                                        <img src="<%= imageUrl %>" class="card-img-top listing-img" alt="listing image">
+                                        <% } %>
+                                            <div class="card-img-overlay">
+                                                <span class="country-badge"><i class="fa-solid fa-location-dot"></i>
+                                                    <%= listing.country %>
+                                                </span>
+                                            </div>
+                                            <div class="card-body">
+                                                <h5 class="card-title">
+                                                    <%= listing.title %>
+                                                </h5>
+                                                <p class="card-text text-muted">&#8377; <%=
+                                                        listing.price.toLocaleString("en-in") %>
+                                                        / night</p>
+                                            </div>
+
+                            </div>
+                        </a>
+                    </div>
+
+                    <% } %>
+
+            </div>
+        </div>
+
+        <script>
+            let taxSwitch = document.getElementById("switchCheckDefault");
+            taxSwitch.addEventListener("click", () => {
+                let countryBadges = document.querySelectorAll(".country-badge");
+                for (let badge of countryBadges) {
+                    if (badge.style.display === "inline-block") {
+                        badge.style.display = "none";
+                    } else {
+                        badge.style.display = "inline-block";
+                    }
+                }
+            });
+        </script>
+    </body>

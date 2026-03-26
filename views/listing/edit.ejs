@@ -1,0 +1,59 @@
+<% layout('/layouts/boilerplate') -%>
+
+  <div class="container my-4">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-8">
+
+        <h2 class="mb-4">Edit Listing</h2>
+
+        <form action="/listings/<%= listing._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+
+          <!-- Title -->
+          <div class="mb-3">
+            <label class="form-label">Title</label>
+            <input type="text" name="title" value="<%= listing.title %>" class="form-control" required>
+          </div>
+
+          <!-- Description -->
+          <div class="mb-3">
+            <label class="form-label">Description</label>
+            <textarea name="description" class="form-control" rows="3" required><%= listing.description %></textarea>
+          </div>
+
+          <!-- Price & Country -->
+          <div class="row">
+            <div class="col-12 col-md-6 mb-3">
+              <label class="form-label">Price</label>
+              <input type="number" name="price" value="<%= listing.price %>" class="form-control" required>
+            </div>
+
+            <div class="col-12 col-md-6 mb-3">
+              <label class="form-label">Country</label>
+              <input type="text" name="country" value="<%= listing.country %>" class="form-control" required>
+            </div>
+          </div>
+
+          <!-- Location -->
+          <div class="mb-3">
+            <label class="form-label">Location</label>
+            <input type="text" name="location" value="<%= listing.location %>" class="form-control" required>
+          </div>
+
+          <!-- Image Upload -->
+          <div class="mb-3">
+            <p>original image</p>
+            <% let originalImageUrl=listing.image?.url || listing.image; %>
+            <img src="<%= originalImageUrl %>" style="width: 300px; height: 200px;" alt="">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Upload New Image</label>
+            <input type="file" name="image" class="form-control">
+          </div>
+
+          <button type="submit" class="btn btn-danger">Update</button>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
